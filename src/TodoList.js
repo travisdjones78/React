@@ -12,7 +12,7 @@ const todoList = [
     },
     {
         id: '3',
-        title: 'Connect Wires'
+        title: 'Build Computers'
     }
 ]
 
@@ -23,7 +23,6 @@ function ToDoList() {
                 <TodoListItem key={item.id} todo={item} />
             )}
         </ul>
-
     )
 }
 
