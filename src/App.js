@@ -3,15 +3,19 @@ import ToDoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 
 function App() {
-  const [newTodo, setNewTodo] = useState('')
+  const [todoList, setTodoList] = useState([])
+  const addTodo = (newTodo)=>{
+    setTodoList([...todoList,newTodo])
+  }
+  // const [newTodo, setNewTodo] = useState('')
   return (
     <div>
       <h1>ToDo List</h1>
-      <AddTodoForm onAddTodo={setNewTodo} />
+      <AddTodoForm onAddTodo={addTodo} />
       <p>
-        {newTodo}
+        {/* {newTodo} */}
       </p>
-      <ToDoList />
+      <ToDoList todoList={todoList}/>
     </div>
   );
 }
