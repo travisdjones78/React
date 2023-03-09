@@ -25,6 +25,7 @@ function App() {
     }
   }, [todoList])
 
+
   const addTodo = (newTodo) => {
     setTodoList([...todoList, newTodo])
   }
