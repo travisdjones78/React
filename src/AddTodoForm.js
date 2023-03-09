@@ -10,7 +10,6 @@ function AddTodoForm(props) {
     }
     const handleAddTodo = (event) => {
         event.preventDefault()
-        const form = event.target
         onAddTodo({
             title: todoTitle,
             id: Date.now()
