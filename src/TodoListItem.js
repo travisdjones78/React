@@ -9,4 +9,5 @@ const TodoListItem = (props) => {
     )
 }
 
-export default TodoListItem
+export default TodoListItem;
+
