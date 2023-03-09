@@ -11,6 +11,7 @@ function ToDoList(props) {
                 todo={item} 
                 onRemoveTodo={onRemoveTodo}
                 />
+
             )}
         </ul>
     )
