@@ -1,6 +1,6 @@
 
-import { React, useState } from "react";
-
+import { useState } from "react";
+import { React } from "react";
 
 function AddTodoForm(props) {
     const { onAddTodo } = props
@@ -29,7 +29,6 @@ function AddTodoForm(props) {
                 value={todoTitle}
                 onChange={handeTitleChange}
             />
-
             <button type="submit">Add</button>
         </form>
     )
