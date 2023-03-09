@@ -11,9 +11,9 @@ const TodoListItem = (props) => {
             >
                 Remove
             </button>
-
         </li>
     )
 }
 
 export default TodoListItem;
+
