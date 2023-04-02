@@ -4,7 +4,7 @@ const TodoListItem = (props) => {
     const { todo, onRemoveTodo } = props
     return (
         <li>
-            {todo.title}
+            {todo.fields.Title}
             <button
                 type="button"
                 onClick={() => onRemoveTodo(todo.id)}
@@ -15,5 +15,4 @@ const TodoListItem = (props) => {
     )
 }
 
-export default TodoListItem;
-
+export default TodoListItem
