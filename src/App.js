@@ -1,8 +1,12 @@
 import { React, useEffect, useState } from "react";
 import ToDoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 
 function App() {
+
+
   const [todoList, setTodoList] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -18,7 +22,7 @@ function App() {
         setIsLoading(false)
       })
   }, [])
-  
+
   useEffect(() => {
     if (isLoading === false) {
       localStorage.setItem('savedTodoList', JSON.stringify(todoList))
@@ -37,18 +41,31 @@ function App() {
   }
 
   return (
-    <>
-      <h1>ToDo List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
-      {(isLoading === true)
-        ? <p>Loading....</p>
-        : <ToDoList
-          todoList={todoList}
-          onRemoveTodo={removeTodo}
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={
+          <>
+            <h1>ToDo List</h1>
+            <AddTodoForm onAddTodo={addTodo} />
+            {
+              (isLoading === true)
+                ? <p>Loading....</p>
+                : <ToDoList
+                  todoList={todoList}
+                  onRemoveTodo={removeTodo}
+                />
+            }
+          </>
+        }
         />
-      }
-    </>
+
+        <Route exact path="/new" element={
+          <h1>New Todo List</h1>
+        } />
+      </Routes>
+    </BrowserRouter>
   );
 }
+
 
 export default App;
