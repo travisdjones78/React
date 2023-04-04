@@ -3,10 +3,7 @@ import ToDoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
 function App() {
-
-
   const [todoList, setTodoList] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -69,3 +66,6 @@ function App() {
 
 
 export default App;
+
+
+
