@@ -1,11 +1,11 @@
-import style from "./TodoListItem.module.css";
-import AddTodoForm from "./AddTodoForm";
-import ToDoList from "./TodoList";
-import TodoBox from "./TodoBox";
+import style from "./components/TodoListItem.module.css";
+import AddTodoForm from "./components/AddTodoForm";
+import ToDoList from "./components/TodoList";
+import TodoBox from "./components/TodoBox";
 import Modal from "./Modal/Modal";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
-import { CreateTodo, UpdateTodo, DeleteOneTodo } from "./Airtable";
+import { CreateTodo, UpdateTodo, DeleteOneTodo } from "./components/Airtable";
 
 const Home = () => {
     const [todoList, setTodoList] = useState([])
