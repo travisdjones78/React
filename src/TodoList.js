@@ -1,18 +1,28 @@
 import { React } from "react";
 import TodoListItem from "./TodoListItem";
 
-function ToDoList(props) {
-    const { todoList, onRemoveTodo } = props
+function ToDoList({
+    todoList,
+    onRemoveTodo,
+    setShow,
+    currItem,
+    grabId,
+    setCurrentBtn,
+    outside
+}) {
     return (
-        <ul>
+        <>
             {todoList.map(item =>
-                <TodoListItem 
-                key={item.id} 
-                todo={item} 
-                onRemoveTodo={onRemoveTodo}
-                />
-            )}
-        </ul>
+                <TodoListItem
+                    key={item.id}
+                    todo={item}
+                    onRemoveTodo={onRemoveTodo}
+                    setShow={setShow}
+                    currItem={currItem}
+                    grabId={grabId}
+                    setCurrentBtn={setCurrentBtn}
+                    outside={outside} />)}
+        </>
     )
 }
 

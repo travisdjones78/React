@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react"
+import style from "./TodoListItem.module.css";
 
-const InputWithLabel = (props) => {
-    const { todoTitle, handeTitleChange, children } = props
-    const inputRef = useRef(null)
+const InputWithLabel = ({ todoTitle, handeTitleChange, children, inputRef }) => {
+
     useEffect(() => {
         inputRef.current.focus();
     }, []);
@@ -10,15 +10,14 @@ const InputWithLabel = (props) => {
         <>
             <label
                 htmlFor="todoTitle"
-                label={children}
-            >
+                label={children}>
             </label>
             <input
+                className={style.inputItem}
                 ref={inputRef}
                 id="todoTitle"
                 value={todoTitle}
-                onChange={handeTitleChange}
-            />
+                onChange={handeTitleChange} />
         </>
     )
 }
