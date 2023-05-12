@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
 import style from "./TodoListItem.module.css";
+import PropTypes from "prop-types";
 
-const Rating = (props) => {
+const Rating = ({
+    rating,
+    ratingChoice
+}) => {
     const [starRating, setStarRating] = useState('')
-    const { rating, ratingChoice } = props
     const finalRating = ratingChoice.filter((choice, idx) => idx + 1 === rating)
 
     useEffect(() => {
@@ -47,6 +50,11 @@ const Rating = (props) => {
             </span>
         </>
     )
+}
+
+Rating.propTypes = {
+    ratingChoice: PropTypes.array,
+    rating: PropTypes.number
 }
 
 export default Rating

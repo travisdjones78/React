@@ -1,15 +1,15 @@
 import { React } from "react";
 import TodoListItem from "./TodoListItem";
+import PropTypes from "prop-types";
 
-function ToDoList({
+const ToDoList = ({
     todoList,
     onRemoveTodo,
     setShow,
-    currItem,
     grabId,
     setCurrentBtn,
     outside
-}) {
+}) => {
     return (
         <>
             {todoList.map(item =>
@@ -18,12 +18,16 @@ function ToDoList({
                     todo={item}
                     onRemoveTodo={onRemoveTodo}
                     setShow={setShow}
-                    currItem={currItem}
                     grabId={grabId}
                     setCurrentBtn={setCurrentBtn}
                     outside={outside} />)}
         </>
     )
 }
-
+ToDoList.propTypes = {
+    onRemoveTodo: PropTypes.func,
+    setShow: PropTypes.func,
+    setCurrentBtn: PropTypes.func,
+    grabId: PropTypes.func,
+}
 export default ToDoList;

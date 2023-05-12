@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useRef } from 'react';
 import style from "./TodoListItem.module.css";
+import PropTypes from "prop-types";
 
 const Interval = ({
     date,
@@ -15,7 +15,6 @@ const Interval = ({
     const todoMinutes = Math.floor((builtTime % (1000 * 60 * 60)) / (1000 * 60))
     const todoHours = Math.floor((builtTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
     const todoDays = Math.floor(builtTime / (1000 * 60 * 60 * 24))
-
     const [seconds, setSeconds] = useState(59 - todoSeconds);
     const [minutes, setMinutes] = useState(59 - todoMinutes)
     const [hours, setHours] = useState(60 - todoHours)
@@ -24,34 +23,9 @@ const Interval = ({
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setSeconds(seconds => {
-                if (seconds <= 0) {
-                    return 59
-                } else {
-                    return seconds - 1
-                }
-            })
-
-            setMinutes(minutes => {
-                if (seconds === 0) {
-                    return minutes - 1
-                }
-                else if (minutes === 0) {
-                    return minutes
-                }
-                else {
-                    return minutes
-                }
-            })
-
-            setHours(hours => {
-                if (minutes === 0 && seconds === 0) {
-                    return hours - 1
-                } else {
-                    return hours
-                }
-            })
-
+            setSeconds(seconds => (seconds <= 0) ? seconds = 59 : seconds = seconds - 1)
+            setMinutes(minutes => (seconds === 0) ? minutes = minutes - 1 : (minutes <= 0) ? minutes = 59 : minutes)
+            setHours(hours => (minutes === 0 && seconds === 0) ? hours = hours - 1 : hours)
             setDays(days => {
                 if (hours > 24) {
                     setHours(hours - 24)
@@ -59,7 +33,7 @@ const Interval = ({
                 } else if (hours === 0 && seconds === 0) {
                     return days = days - 1
                 } else {
-                    return days = days
+                    return days
                 }
             })
         }, 1000);
@@ -113,5 +87,12 @@ const Interval = ({
         </>
     );
 };
+Interval.propTypes = {
+    editing: PropTypes.bool,
+    date: PropTypes.string,
+    dead_line: PropTypes.string
+}
+
+
 
 export default Interval;
