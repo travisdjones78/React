@@ -19,7 +19,8 @@ const Home = () => {
     const [currentModal, setCurrentModal] = useState('')
     const [modalTitle, setModalTitle] = useState('')
     const [todoId, setTodoId] = useState('')
-
+    const [todoOrder, setTodoOrder] = useState('asc')
+    const [createdOrder, setCreatedOrder] = useState('asc')
     const btnChoice = useRef(null)
     const removeBtn = useRef(null)
     const start_date = useRef('')
@@ -35,7 +36,7 @@ const Home = () => {
             if (item.fields.Status === 'To do') {
                 return item
             }
-            return
+            return 
         })
         setUndoneTodo(undoneList)
     }, [todoList])
@@ -51,26 +52,37 @@ const Home = () => {
     }, [todoList])
 
     useEffect(() => {
-        fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/todos`, {
-            headers: {
-                'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
-            }
+        fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/todos?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`, {
+            headers: { 'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}` }
         })
             .then(result => result.json())
             .then(result => {
-                console.log(result)
                 setTodoList(result.records)
                 setIsLoading(false)
             })
         setIsLoading(false)
     }, [])
 
+    const titleSorter = () => {
+        (todoOrder === 'asc')
+            ? todoList.sort((prev, curr) => prev.fields.Title < curr.fields.Title ? -1 : 1)
+            : todoList.sort((prev, curr) => prev.fields.Title > curr.fields.Title ? -1 : 1)
+        return (todoOrder === 'asc') ? setTodoOrder('') : setTodoOrder('asc')
+    }
+
+    const createdSorter = () => {
+        (createdOrder === 'asc')
+            ? todoList.sort((prev, curr) => prev.createdTime < curr.createdTime ? -1 : 1)
+            : todoList.sort((prev, curr) => prev.createdTime > curr.createdTime ? -1 : 1)
+        return (createdOrder === 'asc') ? setCreatedOrder('') : setCreatedOrder('asc')
+    }
+
     useEffect(() => {
         if (isLoading === false) {
             localStorage.setItem('savedTodoList', JSON.stringify(todoList))
         }
+        console.log(todoList)
     }, [todoList])
-
 
     const setCurrentBtn = (event) => {
         event.preventDefault()
@@ -83,7 +95,7 @@ const Home = () => {
         }
         setShow(true);
     }
-
+ 
     const addTodo = (newTodo) => {
         console.log('nt', newTodo)
         CreateTodo(newTodo)
@@ -151,6 +163,8 @@ const Home = () => {
                             onClick={setCurrentBtn}>
                             Create Todo
                         </button>
+                        <button onClick={titleSorter}>Sort By Title {(todoOrder === 'asc') ? 'Down' : 'Up'}</button>
+                        <button onClick={createdSorter}>Sort by Created Date {(createdOrder === 'asc') ? 'Down' : 'Up'}</button>
                         {(isLoading === true)
                             ? <h1>Loading....</h1>
                             : <ToDoList

@@ -4,7 +4,6 @@ import InputWithLabel from "./InputWithLabel";
 import style from "./TodoListItem.module.css";
 import PropTypes from "prop-types";
 
-
 function AddTodoForm({ onAddTodo, start_date, title, rating, status, dead_line, ratingChoice }) {
     const [todoTitle, setTodoTitle] = useState('')
     const inputRef = useRef(null)
@@ -67,6 +66,10 @@ function AddTodoForm({ onAddTodo, start_date, title, rating, status, dead_line, 
 
         </form>
     )
+}
+
+AddTodoForm.propTypes = {
+    onAddTodo: PropTypes.func,
 }
 
 export default AddTodoForm;

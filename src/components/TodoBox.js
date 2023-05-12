@@ -2,6 +2,7 @@ import style from "./TodoListItem.module.css";
 import Rating from "./Rating";
 import Interval from "./Interval";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const TodoBox = ({
     todoInfo,
@@ -59,6 +60,7 @@ const TodoBox = ({
         }
         return [rating, ...filterRatings]
     }
+    
     const setStartdate = (event) => {
         event.preventDefault()
         return (event.target.value === 'y') ? setShowDate(true) : setShowDate(false)
@@ -192,6 +194,14 @@ const TodoBox = ({
                 : ''}
         </>
     )
+}
+
+TodoBox.propTypes = {
+    removeTodo: PropTypes.func,
+    editSettings: PropTypes.func,
+    setEditBtns: PropTypes.func,
+    updateTodo: PropTypes.func,
+    setTodoId: PropTypes.func,
 }
 
 export default TodoBox
